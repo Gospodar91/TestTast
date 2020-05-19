@@ -1,76 +1,42 @@
-import{ useEffect, useState } from "react";
-import Head from 'next/head'
-import Link from 'next/link'
+import Head from "next/head";
+import Link from "next/link";
 
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
-import { getSortedPostsData ,} from '../lib/posts'
+import Layout, { siteTitle } from "../components/layout";
+import utilStyles from "../styles/utils.module.css";
+import { getSortedPostsData } from "../lib/posts";
 export async function getStaticProps() {
-  const allPostsData = getSortedPostsData()
+  const allPostsData = await getSortedPostsData();
   return {
     props: {
-      allPostsData
-    }
-  }
+      allPostsData,
+    },
+  };
 }
-
-
-  export async function getAllPostsFromServer() {
-    const allPostsDataFromServer = getAllPosts()
-    return {
-      props: {
-        allPostsDataFromServer
-      }
-    }
-  }
-
-
- const Home=({ allPostsData , allPostsDataFromServer}) =>{
-  // const [postState, setState] = useState([]);
-  // const  getPosts =async () => {
-  //   await operations.getAllPosts().then(data => {
-  //     return( 
-  //       console.log('datUEIIIa', data),setState('hhhhhhh')) 
-    
-  //   })
-  //  await console.log('postState', postState);
-  // };
-  // getPosts();
-  // useEffect(() => {
-  //   getPosts();
-  // }, [postState]);
-
-
+const Home = ({ allPostsData }) => {
   return (
     <Layout home>
-   
       <Head>…</Head>
-      {/* {postState&& postState.map((elem)=> (
-            <li className={utilStyles.listItem} key={id}>
-              {elem.title}
-              <br />
-              {elem.id}
-              <br />
-              {elem.body}
-            </li>
-         ))} */}
+<section className='createPost'>
+  <Link href="/posts/CreatePost">
+    <a>Create Post Link</a>
+  </Link>
+</section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-           <li className={utilStyles.listItem} key={id}>
-  <Link href="/posts/[id]" as={`/posts/${id}`}>
-    <a>{title}</a>
-  </Link>
-  <br />
-  <small className={utilStyles.lightText}>
-    <Date dateString={date} />
-  </small>
-</li>
+          {allPostsData.map(({ params }) => (
+            <li className={utilStyles.listItem} key={params.id}>
+              <Link href="/posts/[id]" as={`/posts/${params.id}`}>
+                <a>{params.title}</a>
+              </Link>
+              <br />
+              <p>{params.body}</p>
+              <small className={utilStyles.lightText}></small>
+            </li>
           ))}
         </ul>
       </section>
     </Layout>
-  )
-}
+  );
+};
 export default Home;

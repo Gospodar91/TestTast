@@ -1,0 +1,1 @@
+{"ast":null,"code":"import axios from 'axios';","map":{"version":3,"sources":["E:/TestTaskNextJs/testDevOps/TestTast/nextjs-blog/pages/posts/CreatePost.js"],"names":["axios"],"mappings":"AAAA,OAAOA,KAAP,MAAkB,OAAlB","sourcesContent":["import axios from 'axios'\r\n\r\n\r\n"]},"metadata":{},"sourceType":"module"}
