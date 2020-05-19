@@ -1,9 +1,7 @@
 import React, { useState, ChangeEvent } from "react";
+import {FormProps} from "../interfaces"
 
 
-interface FormProps{
-    onAdd(title:string,body:string):void
-}
 const Form: React.FC<FormProps> = (props) => {
   const [textTitle, setTextTitle] = useState<string>();
   const [textBody, setTextBody] = useState<string>();
@@ -29,7 +27,6 @@ if(event.key==='Enter'){
       <input 
       onChange={changeHandlerTitle}
       value={textTitle}
-    //   onKeyPress={keyPress}
       placeholder='Enter Title'
       type="text" id="title" />
       <label htmlFor="title" className="active">
@@ -38,7 +35,6 @@ if(event.key==='Enter'){
       <input 
       onChange={changeHandlerBody}
       value={textBody}
-    //   onKeyPress={keyPress}
       placeholder='Enter description'
       type="text" id="body" />
       <label htmlFor="body" className="active">
