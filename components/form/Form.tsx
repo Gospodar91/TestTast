@@ -1,41 +1,52 @@
 import React, { useState, ChangeEvent } from "react";
- 
- interface IForm{
-    title:string
-    body:string
+
+
+interface FormProps{
+    onAdd(title:string,body:string):void
 }
-
-
-
-
-
-
-interface TodoProps{
-    onAdd(title:string):void
-}
-export const ToDoForm: React.FC<TodoProps> = (props) => {
-  const [titleState, setTitleState] = useState<string>();
-  const changeHandler=(event:ChangeEvent<HTMLInputElement>)=>{
-      setTitleState(event.target.value)
+const Form: React.FC<FormProps> = (props) => {
+  const [textTitle, setTextTitle] = useState<string>();
+  const [textBody, setTextBody] = useState<string>();
+  const changeHandlerTitle=(event:ChangeEvent<HTMLInputElement>)=>{
+      setTextTitle(event.target.value)
+  }
+  const changeHandlerBody=(event:ChangeEvent<HTMLInputElement>)=>{
+      setTextBody(event.target.value)
   }
   const keyPress=(event:React.KeyboardEvent)=>
   {
 if(event.key==='Enter'){
-   props.onAdd(titleState!)
-    setTitleState('')
+   props.onAdd(textTitle!,textBody!)
+  
+    setTextTitle('')
+    setTextBody('')
+
 }
   }
   return (
-    <div className="input-field todoForm">
+    <div className="input-field">
+        <form className='form' onKeyPress={keyPress}>
       <input 
-      onChange={changeHandler}
-      value={titleState}
-      onKeyPress={keyPress}
-      placeholder='Enter To Do'
+      onChange={changeHandlerTitle}
+      value={textTitle}
+    //   onKeyPress={keyPress}
+      placeholder='Enter Title'
       type="text" id="title" />
       <label htmlFor="title" className="active">
-        Enter To DO
+      Enter Title
       </label>
+      <input 
+      onChange={changeHandlerBody}
+      value={textBody}
+    //   onKeyPress={keyPress}
+      placeholder='Enter description'
+      type="text" id="body" />
+      <label htmlFor="body" className="active">
+     Enter description
+      </label>
+      <h3> Fill the blanks and press Enter</h3>
+      </form>
     </div>
   );
 };
+export default Form
