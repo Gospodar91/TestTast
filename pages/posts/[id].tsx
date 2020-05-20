@@ -15,7 +15,7 @@ const Post: React.FC<IPost> = ({ postData }) => {
         <p className="styles">{postData.body}</p>
         <h2> COMMENTS</h2>
         {postData.comments.map((elem) => (
-          <li key={elem.postId}>
+          <li className={utilStyles.dynamicList} key={elem.postId}>
             <p> {elem.body}</p>
           </li>
         ))}

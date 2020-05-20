@@ -1,48 +1,74 @@
 import React, { useState, ChangeEvent } from "react";
-import {FormProps} from "../interfaces"
+import { FormProps } from "../interfaces";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 
-
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "100%",
+    },
+  },
+}));
 const Form: React.FC<FormProps> = (props) => {
+  const classes = useStyles();
   const [textTitle, setTextTitle] = useState<string>();
   const [textBody, setTextBody] = useState<string>();
-  const changeHandlerTitle=(event:ChangeEvent<HTMLInputElement>)=>{
-      setTextTitle(event.target.value)
-  }
-  const changeHandlerBody=(event:ChangeEvent<HTMLInputElement>)=>{
-      setTextBody(event.target.value)
-  }
-  const keyPress=(event:React.KeyboardEvent)=>
-  {
-if(event.key==='Enter'){
-   props.onAdd(textTitle!,textBody!)
-  
-    setTextTitle('')
-    setTextBody('')
+  const changeHandlerTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setTextTitle(event.target.value);
+  };
+  const changeHandlerBody = (event: ChangeEvent<HTMLInputElement>) => {
+    setTextBody(event.target.value);
+  };
+  const keyPress = (event: React.KeyboardEvent) => {
+    if (event.key === "Enter") {
+      props.onAdd(textTitle!, textBody!);
+      setTextTitle("");
+      setTextBody("");
+      alert("Post Submitted!")
+    }
+  };
 
-}
-  }
   return (
-    <div className="input-field">
-        <form className='form' onKeyPress={keyPress}>
-      <input 
-      onChange={changeHandlerTitle}
-      value={textTitle}
-      placeholder='Enter Title'
-      type="text" id="title" />
-      <label htmlFor="title" className="active">
-      Enter Title
-      </label>
-      <input 
-      onChange={changeHandlerBody}
-      value={textBody}
-      placeholder='Enter description'
-      type="text" id="body" />
-      <label htmlFor="body" className="active">
-     Enter description
-      </label>
-      <h3> Fill the blanks and press Enter</h3>
-      </form>
-    </div>
+    <>
+      <div className="">
+        <form
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+          onKeyPress={keyPress}
+          // submit={onSubmit}
+        >
+          <div>
+            <TextField
+              className="formDiv"
+              label="Title"
+              onChange={changeHandlerTitle}
+              value={textTitle}
+              id="outlined-size-normal"
+              defaultValue=""
+              variant="filled"
+              color="secondary"
+              autoFocus
+            />
+          </div>
+          <div>
+            <TextField
+              className="formDiv"
+              label="Message"
+              onChange={changeHandlerBody}
+              value={textBody}
+              id="outlined-size-normal"
+              defaultValue=""
+              variant="filled"
+              color="secondary"
+              autoFocus
+            />
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
-export default Form
+export default Form;

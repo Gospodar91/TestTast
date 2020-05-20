@@ -18,12 +18,7 @@ const createPost: React.FC = () => {
         url: "https://simple-blog-api.crew.red/posts/",
         data: { ...textState },
       });
-      // try {
-      //   const data = await axios({
-      //     method: "delete",
-      //     url: "https://simple-blog-api.crew.red/posts/9",
-
-      //   });
+  
     } catch (error) {
       console.log("POST ERROR", error);
       throw new Error();
