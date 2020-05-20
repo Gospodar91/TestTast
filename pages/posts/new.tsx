@@ -18,7 +18,6 @@ const createPost: React.FC = () => {
         url: "https://simple-blog-api.crew.red/posts/",
         data: { ...textState },
       });
-  
     } catch (error) {
       console.log("POST ERROR", error);
       throw new Error();
@@ -27,7 +26,6 @@ const createPost: React.FC = () => {
   if (textState.body && textState.title) {
     pushPost();
   }
-
   const addhandler = (title: string, body: string) => {
     const mainPost: Itext = {
       title: title,
